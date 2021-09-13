@@ -2,6 +2,7 @@
 
 namespace app\Controllers;
 
+use app\Requests\CustomRequestHandler;
 use app\Response\CustomResponse;
 use Psr\Http\Message\ResponseInterface as Response;
 use Psr\Http\Message\RequestInterface as Request;
@@ -16,7 +17,8 @@ class GuestEntryController
     }
 
     public function createGuest(Request $request, Response $response){
-        $responseMessage = "This route works";
+        $name = CustomRequestHandler::getParam($request, "name");
+        $responseMessage = $name;
         return $this->customResponse->is200Response($response, $responseMessage);
     }
 }
